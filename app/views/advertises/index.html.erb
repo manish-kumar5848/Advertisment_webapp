@@ -1,0 +1,45 @@
+<h1 id='headtag1'></h1>
+<p id="notice"><%= notice %></p>
+<h1>Advertises</h1>
+     <script>
+     var counter = 0;
+     </script>
+    <% @advertises.each do |advertise| %>
+        
+      <div class="card" style="width: 50%;">
+       <img class="card-img-top" src=<%= advertise.image_urls %> alt="Card image cap">
+       <div class="card-body">
+       <h5 class="card-title"><%= advertise.Title %></h5>
+       <p class="card-text"><%= advertise.text %></p>
+        <h5 align='right'>BY User : <%= advertise.user_id %></h5>
+
+        <!--- <%= link_to 'Show', advertise, class:"btn btn-primary" %> --->
+    <% if user_signed_in? %>
+    <% if advertise.user == current_user %>
+    <div align = 'right'>
+    <%= link_to 'Edit', edit_advertise_path(advertise), class:"btn btn-primary" %>
+    <%= link_to 'Delete', advertise, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary" %>
+    </div>
+    <% end %>
+
+       <h5 class="card-title">Comments</h5>
+       
+       <h6 style="background-color:powderblue;"><%= advertise.commentbox %></h6>
+       
+       <%= render 'form', advertise: advertise,flag: 0 %>
+    
+
+    
+    <% end %>
+    </div>
+</div>
+<br>
+<br>
+
+    <% end %>
+ 
+
+<br>
+
+<%= link_to 'New Advertise', new_advertise_path %>
+

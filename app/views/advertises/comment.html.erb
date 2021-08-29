@@ -1,0 +1,42 @@
+<%= form_with(model: advertise) do |form| %>
+    <% if advertise.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(advertise.errors.count, "error") %> prohibited this advertise from being saved:</h2>
+  
+        <ul>
+          <% advertise.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+    <%= form.label :image_urls %>
+    <%= form.text_field :image_urls,:maxlength=>"100" %>
+  </div>
+  <div class="field">
+  <%= form.label :Title %>
+  <%= form.text_field :Title,:maxlength=>"100" %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :text %>
+    <%= form.text_area :text,cols: 100, rows: 15 %>
+  </div>
+  
+  <div class="field">
+    <%= form.number_field :user_id,id: :advertise_user_id, value:current_user.id, type: :hidden %>
+  </div>
+  
+  <div class="field">
+  <%= form.text_field :commentbox,id: :advertise_commentbox, value:"Comments", type: :hidden %>
+  </div>
+    <div class="actions">
+    <script>
+    console.log("query page form")
+    </script>  
+    <%= form.submit %>
+    </div>
+  <% end %>
+  
